@@ -1,0 +1,9 @@
+while read cruise metric; do
+  cruise=${cruise//$'\r'/}
+  metric=${metric//$'\r'/}
+
+  python -m papermill 11_attune_ifcb_merge.ipynb "_tmp_${cruise}_${metric}.ipynb" \
+    -k lab \
+    -p cruise "$cruise" \
+    -p metric "$metric"
+done < runs.txt
